@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{977F20D1-B7F2-4E47-8F54-046FD7ABB3C7}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+
+        <!-- Naming -->
+        <AssemblyName>RocketFlowExample</AssemblyName>
+        <RootNamespace>Tavstal.RocketFlow.Example</RootNamespace>
+        <Product>RocketFlowExample</Product>
+        <Company>Tavstal</Company>
+        <Copyright>Copyright © 2026 Tavstal</Copyright>
+
+        <!-- Version -->
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <BuildDate>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss"))</BuildDate>
+        <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+        <!-- Config -->
+        <LangVersion>8.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <FileAlignment>512</FileAlignment>
+        <Deterministic>true</Deterministic>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <!-- Custom Metadata -->
+    <ItemGroup>
+        <AssemblyMetadata Include="BuildDate" Value="$(BuildDate)" />
+    </ItemGroup>
+
+    <!-- Libraries -->
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>..\assets\libraries\Assembly-CSharp.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="com.rlabrecque.steamworks.net">
+            <HintPath>..\assets\libraries\com.rlabrecque.steamworks.net.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Rocket.API">
+            <HintPath>..\assets\libraries\Rocket.API.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Rocket.Core">
+            <HintPath>..\assets\libraries\Rocket.Core.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="Rocket.Unturned">
+            <HintPath>..\assets\libraries\Rocket.Unturned.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="SDG.NetTransport">
+            <HintPath>..\assets\libraries\SDG.NetTransport.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>..\assets\libraries\UnityEngine.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>..\assets\libraries\UnityEngine.CoreModule.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\RocketFlow\RocketFlow.csproj" />
+    </ItemGroup>
+</Project>
