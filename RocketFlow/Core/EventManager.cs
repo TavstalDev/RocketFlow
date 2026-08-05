@@ -63,6 +63,17 @@ namespace Tavstal.RocketFlow.Core
             }
         }
         
+        public static void UnregisterAll(RocketPlugin plugin)
+        {
+            if (plugin == null) return;
+ 
+            lock (_lock)
+            {
+                foreach (var list in _subscriptions.Values)
+                    list.RemoveAll(s => s.OwningAssembly == plugin.GetType().Assembly);
+            }
+        }
+        
         public static void UnregisterAll(object? listenerInstance)
         {
             if (listenerInstance == null) return;
@@ -73,6 +84,7 @@ namespace Tavstal.RocketFlow.Core
                     list.RemoveAll(s => ReferenceEquals(s.Target, listenerInstance));
             }
         }
+        
         public static void UnregisterAssembly(Assembly? assembly)
         {
             if (assembly == null) return;
