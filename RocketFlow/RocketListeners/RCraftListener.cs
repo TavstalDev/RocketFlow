@@ -1,5 +1,6 @@
-using System;
 using SDG.Unturned;
+using Tavstal.RocketFlow.Core;
+using Tavstal.RocketFlow.Events.Crafting;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
@@ -11,6 +12,6 @@ namespace Tavstal.RocketFlow.RocketListeners
         }
 
         private void OnCraftBlueprintRequested(PlayerCrafting crafting, ref Blueprint blueprint, ref bool shouldAllow) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new CraftBlueprintEvent(crafting, ref blueprint, ref shouldAllow));
     }
 }
