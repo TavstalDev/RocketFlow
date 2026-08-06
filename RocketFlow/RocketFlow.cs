@@ -5,7 +5,6 @@ namespace Tavstal.RocketFlow
     public static class RocketFlow
     {
         private static bool _initialized;
-        private static RAdminListener? _adminListener;
         private static RBarricadeListener? _barricadeListener;
         private static RCraftListener? _craftListener;
         private static RDamageListener? _damageListener;
@@ -14,7 +13,7 @@ namespace Tavstal.RocketFlow
         private static RPlayerLifeListener? _playerLifeListener;
         private static RPlayerListener? _playerListener;
         private static RPluginListener? _pluginListener;
-        private static RServerListener? _serverListener;
+        private static RProviderListener? _serverListener;
         private static RStructureListener? _structureListener;
         private static RVehicleListener? _vehicleListener;
         private static RWorldListener? _worldListener;
@@ -27,7 +26,6 @@ namespace Tavstal.RocketFlow
 
             try
             {
-                _adminListener = new RAdminListener();
                 _barricadeListener = new RBarricadeListener();
                 _craftListener = new RCraftListener();
                 _damageListener = new RDamageListener();
@@ -36,7 +34,7 @@ namespace Tavstal.RocketFlow
                 _playerLifeListener = new RPlayerLifeListener();
                 _playerListener = new RPlayerListener();
                 _pluginListener = new RPluginListener();
-                _serverListener = new RServerListener();
+                _serverListener = new RProviderListener();
                 _structureListener = new RStructureListener();
                 _vehicleListener = new RVehicleListener();
                 _worldListener = new RWorldListener();

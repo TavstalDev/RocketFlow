@@ -2,6 +2,8 @@ using Rocket.Core.Plugins;
 using Tavstal.RocketFlow.Attributes;
 using Tavstal.RocketFlow.Core;
 using Tavstal.RocketFlow.Events.Player;
+using Tavstal.RocketFlow.Events.Player.Life;
+using Tavstal.RocketFlow.Events.Player.Movement;
 
 namespace Tavstal.RocketFlow.Example
 {
