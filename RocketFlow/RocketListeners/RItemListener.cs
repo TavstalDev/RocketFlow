@@ -1,5 +1,6 @@
-using System;
 using SDG.Unturned;
+using Tavstal.RocketFlow.Core;
+using Tavstal.RocketFlow.Events.Item;
 using UnityEngine;
 
 namespace Tavstal.RocketFlow.RocketListeners
@@ -19,27 +20,27 @@ namespace Tavstal.RocketFlow.RocketListeners
         }
 
         private void OnServerSpawningItemDrop(Item item, ref Vector3 location, ref bool shouldAllow) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemDropSpawningEvent(item, ref location, ref shouldAllow));
 
         private void OnTakeItemRequested(Player player, byte x, byte y, uint instanceID, byte to_x, byte to_y, byte to_rot, byte to_page, ItemData itemData, ref bool shouldAllow) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemTakeEvent(player, x, y, instanceID, to_x, to_y, to_rot, to_page, itemData, ref shouldAllow));
 
         private void OnItemDropAdded(Transform model, InteractableItem interactableItem) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemDropAddedEvent(model, interactableItem));
 
         private void OnItemDropRemoved(Transform model, InteractableItem interactableItem) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemDropRemovedEvent(model, interactableItem));
 
         private void OnConsumeRequested(Player instigatingPlayer, ItemConsumeableAsset consumeableAsset, ref bool shouldAllow) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemConsumeEvent(instigatingPlayer, consumeableAsset, ref shouldAllow));
 
         private void OnConsumePerformed(Player instigatingPlayer, ItemConsumeableAsset consumeableAsset) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ItemConsumedEvent(instigatingPlayer, consumeableAsset));
 
         private void OnUseableChanged(PlayerEquipment equipment) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new EquipmentUseableChangedEvent(equipment));
 
         private void OnPunch(PlayerEquipment equipment, EPlayerPunch mode) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new EquipmentPunchEvent(equipment, mode));
     }
 }
