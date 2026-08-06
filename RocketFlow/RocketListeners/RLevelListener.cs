@@ -31,7 +31,7 @@ namespace Tavstal.RocketFlow.RocketListeners
             EventManager.Fire(new LevelLoadedEvent(level));
 
         private void OnPreLevelLoaded(int level) =>
-            EventManager.Fire(new LevelPrePreLoadEvent(level));
+            EventManager.Fire(new LevelPreLoadEvent(level));
 
         private void OnPostLevelLoaded(int level) =>
             EventManager.Fire(new LevelPostLoadEvent(level));
