@@ -1,5 +1,6 @@
-using System;
 using SDG.Unturned;
+using Tavstal.RocketFlow.Core;
+using Tavstal.RocketFlow.Events.Zombie;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
@@ -11,6 +12,6 @@ namespace Tavstal.RocketFlow.RocketListeners
         }
 
         private void OnWaveUpdated(bool newWaveReady, int newWaveIndex) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new ZombieWaveEvent(newWaveReady, newWaveIndex));
     }
 }
