@@ -1,6 +1,7 @@
-using System;
 using Rocket.API;
 using Rocket.Core.Plugins;
+using Tavstal.RocketFlow.Core;
+using Tavstal.RocketFlow.Events.Plugin;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
@@ -13,9 +14,9 @@ namespace Tavstal.RocketFlow.RocketListeners
         }
 
         private void OnPluginLoading(IRocketPlugin plugin, ref bool cancelLoading) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new PluginLoadingEvent(plugin, ref cancelLoading));
 
         private void OnPluginUnloading(IRocketPlugin plugin) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new PluginUnloadingEvent(plugin));
     }
 }
