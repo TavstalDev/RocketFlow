@@ -1,18 +1,24 @@
 using System;
+using System.Collections.Concurrent;
 using Rocket.Unturned;
 using Rocket.Unturned.Events;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
+using Tavstal.RocketFlow.Core;
+using Tavstal.RocketFlow.Events.Player;
+using Tavstal.RocketFlow.Events.Player.Life;
+using Tavstal.RocketFlow.RocketListeners.Models;
 using UnityEngine;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
     internal class RPlayerLifeListener
     {
+        private readonly ConcurrentDictionary<string, PlayerSubscriptions> playerSubscriptions = new ConcurrentDictionary<string, PlayerSubscriptions>();
+        
         public RPlayerLifeListener()
         {
             PlayerLife.onPlayerLifeUpdated += OnPlayerLifeUpdated;
-            UnturnedPlayerEvents.OnPlayerUpdateLife += OnPlayerUpdateLife;
             UnturnedEvents.OnPlayerDamaged += OnPlayerDamaged;
             U.Events.OnPlayerConnected += OnPlayerConnected;
             U.Events.OnPlayerDisconnected += OnPlayerDisconnected;
@@ -20,66 +26,45 @@ namespace Tavstal.RocketFlow.RocketListeners
 
         private void OnPlayerConnected(UnturnedPlayer player)
         {
+            var subscriptions = new PlayerSubscriptions(player);
+            if (!playerSubscriptions.TryAdd(player.Id, subscriptions))
+                return;
+            
             PlayerLife life = player.Player.life;
-            life.onLifeUpdated += OnLifeUpdated;
-            life.onTemperatureUpdated += OnTemperatureUpdated;
-            life.onOxygenUpdated += OnOxygenUpdated;
-            life.onVisionUpdated += OnVisionUpdated;
-            life.onDamaged += OnDamaged;
+            life.onOxygenUpdated += subscriptions.OxygenCallback;
+            life.onVisionUpdated += subscriptions.VisionCallback;
+            life.onTemperatureUpdated += subscriptions.TemperatureCallback;
+            life.onDamaged += subscriptions.DamagedCallback;
 
             PlayerSkills skills = player.Player.skills;
-            skills.onReputationUpdated += OnReputationUpdated;
-            skills.onBoostUpdated += OnBoostUpdated;
-            skills.onSkillsUpdated += OnSkillsUpdated;
+            skills.onReputationUpdated += subscriptions.ReputationCallback;
+            skills.onBoostUpdated += subscriptions.BoostCallback;
+            skills.onSkillsUpdated += subscriptions.SkillsCallback;
         }
 
         private void OnPlayerDisconnected(UnturnedPlayer player)
         {
+            if (!playerSubscriptions.TryRemove(player.Id, out PlayerSubscriptions subscriptions))
+                return;
+            
             PlayerLife life = player.Player.life;
-            life.onLifeUpdated -= OnLifeUpdated;
-            life.onTemperatureUpdated -= OnTemperatureUpdated;
-            life.onOxygenUpdated -= OnOxygenUpdated;
-            life.onVisionUpdated -= OnVisionUpdated;
-            life.onDamaged -= OnDamaged;
+            life.onOxygenUpdated -= subscriptions.OxygenCallback;
+            life.onVisionUpdated -= subscriptions.VisionCallback;
+            life.onTemperatureUpdated -= subscriptions.TemperatureCallback;
+            life.onDamaged -= subscriptions.DamagedCallback;
 
             PlayerSkills skills = player.Player.skills;
-            skills.onReputationUpdated -= OnReputationUpdated;
-            skills.onBoostUpdated -= OnBoostUpdated;
-            skills.onSkillsUpdated -= OnSkillsUpdated;
+            skills.onReputationUpdated -= subscriptions.ReputationCallback;
+            skills.onBoostUpdated -= subscriptions.BoostCallback;
+            skills.onSkillsUpdated -= subscriptions.SkillsCallback;
         }
 
         private void OnPlayerLifeUpdated(Player player) =>
-            throw new NotImplementedException();
-
-        private void OnPlayerUpdateLife(UnturnedPlayer player, byte life) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new PlayerLifeStateEvent(UnturnedPlayer.FromPlayer(player), player.life.isDead));
 
         private void OnPlayerDamaged(UnturnedPlayer player, ref EDeathCause cause, ref ELimb limb, ref UnturnedPlayer killer,
             ref Vector3 direction, ref float damage, ref float times, ref bool canDamage) =>
-            throw new NotImplementedException();
+            EventManager.Fire(new PlayerDamagedEvent(player, ref cause, ref limb, ref killer, ref direction, ref damage, ref times, ref canDamage));
 
-        private void OnLifeUpdated(bool isDead) =>
-            throw new NotImplementedException();
-
-        private void OnTemperatureUpdated(EPlayerTemperature newTemperature) =>
-            throw new NotImplementedException();
-
-        private void OnOxygenUpdated(byte newOxygen) =>
-            throw new NotImplementedException();
-
-        private void OnVisionUpdated(bool isViewing) =>
-            throw new NotImplementedException();
-
-        private void OnDamaged(byte damage) =>
-            throw new NotImplementedException();
-
-        private void OnReputationUpdated(int newReputation) =>
-            throw new NotImplementedException();
-
-        private void OnBoostUpdated(EPlayerBoost newBoost) =>
-            throw new NotImplementedException();
-
-        private void OnSkillsUpdated() =>
-            throw new NotImplementedException();
     }
 }

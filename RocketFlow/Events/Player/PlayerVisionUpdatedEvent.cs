@@ -3,16 +3,15 @@ using Tavstal.RocketFlow.Core;
 
 namespace Tavstal.RocketFlow.Events.Player
 {
-    public class PlayerBonesEvent: Event
+    public class PlayerVisionUpdatedEvent : Event
     {
         public UnturnedPlayer Player { get; }
+        public bool IsViewing { get; }
         
-        public bool IsBroken { get; }
-
-        public PlayerBonesEvent(UnturnedPlayer player, bool isBroken)
+        public PlayerVisionUpdatedEvent(UnturnedPlayer player, bool isViewing)
         {
             Player = player;
-            IsBroken = isBroken;
+            IsViewing = isViewing;
         }
     }
 }

@@ -2,7 +2,7 @@ using Rocket.Unturned.Events;
 using Rocket.Unturned.Player;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Movement
 {
     public class PlayerGestureEvent : Event
     {

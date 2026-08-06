@@ -1,7 +1,7 @@
 using Rocket.Unturned.Player;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Life
 {
     public class PlayerVirusEvent : Event
     {

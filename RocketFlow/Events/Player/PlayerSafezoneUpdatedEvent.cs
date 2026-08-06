@@ -3,16 +3,15 @@ using Tavstal.RocketFlow.Core;
 
 namespace Tavstal.RocketFlow.Events.Player
 {
-    public class PlayerExperienceEvent : Event
+    public class PlayerSafezoneUpdatedEvent : Event
     {
         public UnturnedPlayer Player { get; }
+        public bool IsSafe { get; }
         
-        public uint Value { get;  }
-
-        public PlayerExperienceEvent(UnturnedPlayer player, uint value)
+        public PlayerSafezoneUpdatedEvent(UnturnedPlayer player, bool isSafe)
         {
             Player = player;
-            Value = value;
+            IsSafe = isSafe;
         }
     }
 }

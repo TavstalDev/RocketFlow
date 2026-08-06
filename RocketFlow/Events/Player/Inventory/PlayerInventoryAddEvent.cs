@@ -3,7 +3,7 @@ using Rocket.Unturned.Player;
 using SDG.Unturned;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Inventory
 {
     public class PlayerInventoryAddEvent : Event
     {

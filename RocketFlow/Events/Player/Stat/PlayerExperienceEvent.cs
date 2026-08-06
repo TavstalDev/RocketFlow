@@ -1,15 +1,15 @@
 using Rocket.Unturned.Player;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Stat
 {
-    public class PlayerWaterEvent : Event
+    public class PlayerExperienceEvent : Event
     {
         public UnturnedPlayer Player { get; }
         
-        public byte Value  { get; }
-        
-        public PlayerWaterEvent(UnturnedPlayer player, byte value)
+        public uint Value { get;  }
+
+        public PlayerExperienceEvent(UnturnedPlayer player, uint value)
         {
             Player = player;
             Value = value;

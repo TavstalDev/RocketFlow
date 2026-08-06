@@ -2,7 +2,7 @@ using Rocket.Unturned.Enumerations;
 using Rocket.Unturned.Player;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Inventory
 {
     public class PlayerInventoryResizeEvent : Event
     {

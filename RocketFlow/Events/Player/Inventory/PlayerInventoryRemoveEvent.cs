@@ -3,9 +3,9 @@ using Rocket.Unturned.Player;
 using SDG.Unturned;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Inventory
 {
-    public class PlayerInventoryEvent : Event
+    public class PlayerInventoryRemoveEvent : Event
     {
         public UnturnedPlayer Player { get; }
         
@@ -15,7 +15,7 @@ namespace Tavstal.RocketFlow.Events.Player
         
         public ItemJar ItemJar { get; }
 
-        public PlayerInventoryEvent(UnturnedPlayer player, InventoryGroup group, byte index, ItemJar itemJar)
+        public PlayerInventoryRemoveEvent(UnturnedPlayer player, InventoryGroup group, byte index, ItemJar itemJar)
         {
             Player = player;
             Group = group;

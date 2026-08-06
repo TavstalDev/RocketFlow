@@ -3,16 +3,15 @@ using Tavstal.RocketFlow.Core;
 
 namespace Tavstal.RocketFlow.Events.Player
 {
-    public class PlayerStanceEvent : Event
+    public class PlayerDeadzoneUpdatedEvent : Event
     {
         public UnturnedPlayer Player { get; }
+        public bool IsInDeadzone { get; }
         
-        public byte Stance { get; }
-
-        public PlayerStanceEvent(UnturnedPlayer player, byte stance)
+        public PlayerDeadzoneUpdatedEvent(UnturnedPlayer player, bool isInDeadzone)
         {
             Player = player;
-            Stance = stance;
+            IsInDeadzone = isInDeadzone;
         }
     }
 }

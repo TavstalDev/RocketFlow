@@ -3,7 +3,7 @@ using SDG.Unturned;
 using Steamworks;
 using Tavstal.RocketFlow.Core;
 
-namespace Tavstal.RocketFlow.Events.Player
+namespace Tavstal.RocketFlow.Events.Player.Life
 {
     public class PlayerDeathEvent : Event
     {
