@@ -58,7 +58,7 @@ namespace Tavstal.RocketFlow.Core
                 {
                     var list = _subscriptions.GetOrAdd(eventType, _ => new List<EventSubscription>());
                     list.Add(subscription);
-                    list.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+                    list.Sort((a, b) => b.Priority.CompareTo(a.Priority));
                 }
             }
         }
