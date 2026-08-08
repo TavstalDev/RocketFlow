@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Concurrent;
 using Rocket.Unturned;
 using Rocket.Unturned.Events;
@@ -12,11 +11,11 @@ using UnityEngine;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    internal class RPlayerLifeListener
+    internal class RPlayerSubscriptionsListener
     {
         private readonly ConcurrentDictionary<string, PlayerSubscriptions> playerSubscriptions = new ConcurrentDictionary<string, PlayerSubscriptions>();
         
-        public RPlayerLifeListener()
+        public RPlayerSubscriptionsListener()
         {
             PlayerLife.onPlayerLifeUpdated += OnPlayerLifeUpdated;
             UnturnedEvents.OnPlayerDamaged += OnPlayerDamaged;
@@ -40,6 +39,29 @@ namespace Tavstal.RocketFlow.RocketListeners
             skills.onReputationUpdated += subscriptions.ReputationCallback;
             skills.onBoostUpdated += subscriptions.BoostCallback;
             skills.onSkillsUpdated += subscriptions.SkillsCallback;
+            
+            PlayerMovement movement = player.Player.movement;
+            movement.onLanded += subscriptions.LandedCallback;
+            movement.onSeated += subscriptions.SeatedCallback;
+            movement.onVehicleUpdated += subscriptions.VehicleUpdatedCallback;
+            
+            PlayerInventory inventory = player.Player.inventory;
+            inventory.onDropItemRequested += subscriptions.DropItemRequestedCallback;
+            inventory.onInventoryStateUpdated += subscriptions.InventoryStateUpdatedCallback;
+            inventory.onInventoryStored += subscriptions.InventoryStoredCallback;
+            
+            PlayerEquipment equipment = player.Player.equipment;
+            equipment.onEquipRequested += subscriptions.EquipRequestedCallback;
+            equipment.onDequipRequested += subscriptions.DequipRequestedCallback;
+            
+            PlayerClothing clothing = player.Player.clothing;
+            clothing.onHatUpdated += subscriptions.HatUpdatedCallback;
+            clothing.onShirtUpdated += subscriptions.ShirtUpdatedCallback;
+            clothing.onPantsUpdated += subscriptions.PantsUpdatedCallback;
+            clothing.onVestUpdated += subscriptions.VestUpdatedCallback;
+            clothing.onMaskUpdated += subscriptions.MaskUpdatedCallback;
+            clothing.onGlassesUpdated += subscriptions.GlassesUpdatedCallback;
+            clothing.onBackpackUpdated += subscriptions.BackpackUpdatedCallback;
         }
 
         private void OnPlayerDisconnected(UnturnedPlayer player)
