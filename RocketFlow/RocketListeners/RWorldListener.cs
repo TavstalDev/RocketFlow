@@ -16,14 +16,25 @@ namespace Tavstal.RocketFlow.RocketListeners
         }
 
         private void OnDamageObjectRequested(CSteamID instigatorSteamID, Transform objectTransform, byte section,
-            ref ushort pendingTotalDamage, ref bool shouldAllow, EDamageOrigin damageOrigin) =>
-            EventManager.Fire(new WorldObjectDamageEvent(instigatorSteamID, objectTransform, section, ref pendingTotalDamage, ref shouldAllow, damageOrigin));
+            ref ushort pendingTotalDamage, ref bool shouldAllow, EDamageOrigin damageOrigin)
+        {
+            var e = EventManager.Fire(new WorldObjectDamageEvent(instigatorSteamID, objectTransform, section, ref pendingTotalDamage, ref shouldAllow, damageOrigin));
+            pendingTotalDamage = e.PendingTotalDamage;
+            shouldAllow = e.ShouldAllow;
+        }
 
         private void OnDamageResourceRequested(CSteamID instigatorSteamID, Transform objectTransform,
-            ref ushort pendingTotalDamage, ref bool shouldAllow, EDamageOrigin damageOrigin) =>
-            EventManager.Fire(new WorldResourceDamageEvent(instigatorSteamID, objectTransform, ref pendingTotalDamage, ref shouldAllow, damageOrigin));
+            ref ushort pendingTotalDamage, ref bool shouldAllow, EDamageOrigin damageOrigin)
+        {
+            var e = EventManager.Fire(new WorldResourceDamageEvent(instigatorSteamID, objectTransform, ref pendingTotalDamage, ref shouldAllow, damageOrigin));
+            pendingTotalDamage = e.PendingTotalDamage;
+            shouldAllow = e.ShouldAllow;
+        }
 
-        private void OnHarvestRequested(InteractableFarm harvestable, SteamPlayer instigatorPlayer, ref bool shouldAllow) =>
-            EventManager.Fire(new WorldHarvestEvent(harvestable, instigatorPlayer, ref shouldAllow));
+        private void OnHarvestRequested(InteractableFarm harvestable, SteamPlayer instigatorPlayer, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new WorldHarvestEvent(harvestable, instigatorPlayer, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
     }
 }

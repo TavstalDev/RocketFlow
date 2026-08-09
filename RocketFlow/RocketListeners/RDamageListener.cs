@@ -14,16 +14,28 @@ namespace Tavstal.RocketFlow.RocketListeners
             DamageTool.onPlayerAllowedToDamagePlayer += PlayerAllowedToDamagePlayer;
         }
 
-        private void OnDamageAnimalRequested(ref DamageAnimalParameters parameters, ref bool shouldAllow) =>
-            EventManager.Fire(new AnimalDamageEvent(ref parameters, ref shouldAllow));
+        private void OnDamageAnimalRequested(ref DamageAnimalParameters parameters, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new AnimalDamageEvent(ref parameters, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
 
-        private void OnDamageZombieRequested(ref DamageZombieParameters parameters, ref bool shouldAllow) =>
-            EventManager.Fire(new ZombieDamageEvent(ref parameters, ref shouldAllow));
+        private void OnDamageZombieRequested(ref DamageZombieParameters parameters, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new ZombieDamageEvent(ref parameters, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
         
-        private void OnDamagePlayerRequested(ref DamagePlayerParameters parameters, ref bool shouldAllow) =>
-            EventManager.Fire(new PlayerDamageEvent(ref parameters, ref shouldAllow));
+        private void OnDamagePlayerRequested(ref DamagePlayerParameters parameters, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new PlayerDamageEvent(ref parameters, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
 
-        private void PlayerAllowedToDamagePlayer(SDG.Unturned.Player instigator, SDG.Unturned.Player victim, ref bool isAllowed) =>
-            EventManager.Fire(new PlayerAllowedToDamagePlayerEvent(instigator, victim, ref isAllowed));
+        private void PlayerAllowedToDamagePlayer(Player instigator, Player victim, ref bool isAllowed)
+        {
+            var e = EventManager.Fire(new PlayerAllowedToDamagePlayerEvent(instigator, victim, ref isAllowed));
+            isAllowed = e.IsAllowed;
+        }
     }
 }

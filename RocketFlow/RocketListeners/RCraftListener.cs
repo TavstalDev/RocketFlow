@@ -11,7 +11,11 @@ namespace Tavstal.RocketFlow.RocketListeners
             PlayerCrafting.OnCraftBlueprintRequestedV2 += OnCraftBlueprintRequested;
         }
 
-        private void OnCraftBlueprintRequested(PlayerCrafting crafting, ref Blueprint blueprint, ref bool shouldAllow) =>
-            EventManager.Fire(new CraftBlueprintEvent(crafting, ref blueprint, ref shouldAllow));
+        private void OnCraftBlueprintRequested(PlayerCrafting crafting, ref Blueprint blueprint, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new CraftBlueprintEvent(crafting, ref blueprint, ref shouldAllow));
+            blueprint = e.Blueprint;
+            shouldAllow = e.ShouldAllow;
+        }
     }
 }

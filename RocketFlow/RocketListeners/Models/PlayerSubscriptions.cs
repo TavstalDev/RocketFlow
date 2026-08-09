@@ -79,14 +79,23 @@ namespace Tavstal.RocketFlow.RocketListeners.Models
             GlassesUpdatedCallback = (newId, newQuality, newState) => EventManager.Fire(new PlayerGlassesUpdatedEvent(player, newId, newQuality, newState));
             MaskUpdatedCallback = (newId, newQuality, newState) => EventManager.Fire(new PlayerMaskUpdatedEvent(player, newId, newQuality, newState));
         }
-        
-        void HandleDropItemRequest(PlayerInventory inventory, Item item, ref bool shouldAllow) =>
-            EventManager.Fire(new PlayerInventoryDropEvent(_player, inventory, item, ref shouldAllow));
-        
-        void HandleEquipRequest(PlayerEquipment equipment, ItemJar jar, ItemAsset asset, ref bool shouldAllow) =>
-            EventManager.Fire(new PlayerEquipEvent(_player, equipment, jar, asset, ref shouldAllow));
-        
-        void HandleDequipRequest(PlayerEquipment equipment, ref bool shouldAllow) =>
-            EventManager.Fire(new PlayerDequipEvent(_player, equipment, ref shouldAllow));
+
+        void HandleDropItemRequest(PlayerInventory inventory, Item item, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new PlayerInventoryDropEvent(_player, inventory, item, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
+
+        void HandleEquipRequest(PlayerEquipment equipment, ItemJar jar, ItemAsset asset, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new PlayerEquipEvent(_player, equipment, jar, asset, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
+
+        void HandleDequipRequest(PlayerEquipment equipment, ref bool shouldAllow)
+        {
+            var e = EventManager.Fire(new PlayerDequipEvent(_player, equipment, ref shouldAllow));
+            shouldAllow = e.ShouldAllow;
+        }
     }
 }

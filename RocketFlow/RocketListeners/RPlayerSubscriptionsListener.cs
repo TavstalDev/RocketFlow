@@ -85,8 +85,17 @@ namespace Tavstal.RocketFlow.RocketListeners
             EventManager.Fire(new PlayerLifeStateEvent(UnturnedPlayer.FromPlayer(player), player.life.isDead));
 
         private void OnPlayerDamaged(UnturnedPlayer player, ref EDeathCause cause, ref ELimb limb, ref UnturnedPlayer killer,
-            ref Vector3 direction, ref float damage, ref float times, ref bool canDamage) =>
-            EventManager.Fire(new PlayerDamagedEvent(player, ref cause, ref limb, ref killer, ref direction, ref damage, ref times, ref canDamage));
+            ref Vector3 direction, ref float damage, ref float times, ref bool canDamage)
+        {
+            var e = EventManager.Fire(new PlayerDamagedEvent(player, ref cause, ref limb, ref killer, ref direction, ref damage, ref times, ref canDamage));
+            cause = e.Cause;
+            limb = e.Limb;
+            killer = e.Killer;
+            direction = e.Direction;
+            damage = e.Damage;
+            times = e.Times;
+            canDamage = e.CanDamage;
+        }
 
     }
 }
