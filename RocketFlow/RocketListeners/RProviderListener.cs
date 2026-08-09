@@ -7,7 +7,7 @@ using Tavstal.RocketFlow.Events.Provider;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    public class RProviderListener : Event
+    internal class RProviderListener : Event
     {
         public RProviderListener()
         {

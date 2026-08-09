@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    public class RVehicleListener
+    internal class RVehicleListener
     {
         public RVehicleListener()
         {

@@ -4,7 +4,7 @@ using Tavstal.RocketFlow.Events.Damage;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    public class RDamageListener
+    internal class RDamageListener
     {
         public RDamageListener()
         {

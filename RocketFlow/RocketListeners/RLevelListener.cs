@@ -4,7 +4,7 @@ using Tavstal.RocketFlow.Events.Level;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    public class RLevelListener
+    internal class RLevelListener
     {
         public RLevelListener()
         {

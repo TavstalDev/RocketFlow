@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Tavstal.RocketFlow.RocketListeners
 {
-    public class RBarricadeListener
+    internal class RBarricadeListener
     {
         public RBarricadeListener()
         {
