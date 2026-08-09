@@ -19,6 +19,7 @@ namespace Tavstal.RocketFlow.Example
 
         protected override void Unload()
         {
+            EventManager.UnregisterAll(this);
             Rocket.Core.Logging.Logger.Log("RocketFlow Example Plugin unloaded.");
         }
 
