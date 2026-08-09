@@ -13,9 +13,6 @@ RocketFlow comes with **110 events** covering most things that happen on an Untu
 > **Handled signal, not a block.** On an `ICancellable` event, `IsCancelled` does **not** prevent the action. It signals to other listeners that the event was **handled and modified** — once set, the remaining (lower-priority) handlers are skipped unless they opt in with `ignoreCancelled: true`.
 >
 > **How you actually control the game.** Each cancellable event also exposes a dedicated control property that is fed back to Unturned — `ShouldAllow`, `Cancel`, `Allow`, `IsAllowed`, `CancelLoading`, `ShouldVanillaBan`, and so on. Set those to allow, block, or change the outcome. The descriptions below name the exact property per event.
->
-> **Note:** a few events expose a control property without implementing `ICancellable` (for example `PlayerInventoryDropEvent`). They behave the same — modify the control property — they just have no handled signal.
-
 ---
 
 ## Player Events
