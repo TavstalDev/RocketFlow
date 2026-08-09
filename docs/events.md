@@ -1,6 +1,6 @@
 # Event Reference
 
-RocketFlow comes with **110 events** covering most things that happen on an Unturned server. All events inherit from `Tavstal.RocketFlow.Core.Event` (which exposes a `FiredAtUtc` timestamp) and live under the `Tavstal.RocketFlow.Events` namespace.
+RocketFlow comes with **112 events** covering most things that happen on an Unturned server. All events inherit from `Tavstal.RocketFlow.Core.Event` (which exposes a `FiredAtUtc` timestamp) and live under the `Tavstal.RocketFlow.Events` namespace.
 
 ## Reading the Tables
 
@@ -107,6 +107,17 @@ RocketFlow comes with **110 events** covering most things that happen on an Untu
 | Event | Description | ICancellable |
 |-------|-------------|--------------|
 | `PlayerVehicleUpdatedEvent` | A player's current vehicle stats updated (fuel, speed, health, battery). | No |
+
+---
+
+## Effect Events
+
+`Tavstal.RocketFlow.Events.Effect`
+
+| Event | Description | ICancellable |
+|-------|-------------|--------------|
+| `EffectButtonEvent` | A player clicked a button in an effect UI. Includes the button's name. | Yes |
+| `EffectTextEvent` | A player committed text in an effect input box. Includes the button's name and the entered `Text`. | Yes |
 
 ---
 
