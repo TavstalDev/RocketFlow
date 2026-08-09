@@ -13,8 +13,11 @@ namespace Tavstal.RocketFlow.RocketListeners
             RocketPlugin.OnPluginUnloading += OnPluginUnloading;
         }
 
-        private void OnPluginLoading(IRocketPlugin plugin, ref bool cancelLoading) =>
-            EventManager.Fire(new PluginLoadingEvent(plugin, ref cancelLoading));
+        private void OnPluginLoading(IRocketPlugin plugin, ref bool cancelLoading)
+        {
+            var e = EventManager.Fire(new PluginLoadingEvent(plugin, ref cancelLoading));
+            cancelLoading = e.CancelLoading;
+        }
 
         private void OnPluginUnloading(IRocketPlugin plugin) =>
             EventManager.Fire(new PluginUnloadingEvent(plugin));

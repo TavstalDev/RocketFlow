@@ -123,7 +123,11 @@ namespace Tavstal.RocketFlow.RocketListeners
             EventManager.Fire(new PlayerWearEvent(player, wear, id, quality));
         
         public void OnPlayerChatted(UnturnedPlayer player, ref Color color, string message, EChatMode chatMode,
-            ref bool cancel) =>
-            EventManager.Fire(new PlayerChatEvent(player, ref color, message, chatMode, ref cancel));
+            ref bool cancel)
+        {
+            var e = EventManager.Fire(new PlayerChatEvent(player, ref color, message, chatMode, ref cancel));
+            color = e.Color;
+            cancel = e.Cancel;
+        }
     }
 }
