@@ -1,4 +1,9 @@
+using System.Reflection;
+using Rocket.Core.Plugins;
+using Tavstal.RocketFlow.Core;
 using Tavstal.RocketFlow.RocketListeners;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable NotAccessedField.Local
 
 namespace Tavstal.RocketFlow
 {
@@ -47,5 +52,15 @@ namespace Tavstal.RocketFlow
                 _initialized = true;
             }
         }
+        
+        public static void RegisterAll(RocketPlugin plugin) => EventManager.RegisterAll(plugin);
+        
+        public static void RegisterAll(object listenerInstance) => EventManager.RegisterAll(listenerInstance);
+
+        public static void UnregisterAll(RocketPlugin plugin) => EventManager.UnregisterAll(plugin);
+        
+        public static void UnregisterAll(object? listenerInstance) => EventManager.UnregisterAll(listenerInstance);
+        
+        public static void UnregisterAssembly(Assembly? assembly) => EventManager.UnregisterAssembly(assembly);
     }
 }
