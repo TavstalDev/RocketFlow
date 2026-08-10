@@ -19,10 +19,24 @@ namespace Tavstal.RocketFlow.Core
         public static void RegisterAll(RocketPlugin plugin)
         {
             var types = plugin.GetType().Assembly.GetTypes();
+            var pluginType = typeof(RocketPlugin);
+            var listenerType = typeof(EventListener);
+            
             foreach (var type in types)
             {
-                if (!type.GetInterfaces().Contains(typeof(EventListener)))
+                if (type.IsAbstract || type.IsInterface)
                     continue;
+                
+                if (!type.GetInterfaces().Contains(listenerType))
+                    continue;
+
+                if (pluginType.IsAssignableFrom(type))
+                {
+                    if (type == plugin.GetType())
+                        RegisterAll((object)plugin);
+                    continue;
+                }
+                
                 RegisterAll(Activator.CreateInstance(type));
             }
         }
