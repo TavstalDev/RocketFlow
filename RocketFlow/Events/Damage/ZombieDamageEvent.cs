@@ -5,7 +5,7 @@ namespace Tavstal.RocketFlow.Events.Damage
 {
     public class ZombieDamageEvent : Event, ICancellable
     {
-        public DamageZombieParameters Parameters { get; }
+        public DamageZombieParameters Parameters { get; set; }
         public bool ShouldAllow { get; set; }
         public bool IsCancelled { get; set; }
         

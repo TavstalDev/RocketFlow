@@ -5,7 +5,7 @@ namespace Tavstal.RocketFlow.Events.Damage
 {
     public class PlayerDamageEvent : Event, ICancellable
     {
-        public DamagePlayerParameters Parameters { get; }
+        public DamagePlayerParameters Parameters { get; set; }
         public bool ShouldAllow { get; set; }
         public bool IsCancelled { get; set; }
         
