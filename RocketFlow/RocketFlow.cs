@@ -24,6 +24,7 @@ namespace Tavstal.RocketFlow
         private static RWorldListener? _worldListener;
         private static RZombieAnimalListener? _zombieAnimalListener;
         private static REffectListener? _effectListener;
+        private static RLightListener? _lightListener;
         
         public static void Initialize()
         {
@@ -46,6 +47,7 @@ namespace Tavstal.RocketFlow
                 _worldListener = new RWorldListener();
                 _zombieAnimalListener = new RZombieAnimalListener();
                 _effectListener = new REffectListener();
+                _lightListener = new RLightListener();
             }
             finally
             {

@@ -43,6 +43,8 @@ namespace Tavstal.RocketFlow.RocketListeners.Models
         public BackpackUpdated BackpackUpdatedCallback { get; private set; }
         public GlassesUpdated GlassesUpdatedCallback { get; private set; }
         public MaskUpdated MaskUpdatedCallback { get; private set; }
+        
+        public Hurt HurtCallback { get; private set; }
 
         public PlayerSubscriptions(UnturnedPlayer player)
         {
@@ -78,6 +80,8 @@ namespace Tavstal.RocketFlow.RocketListeners.Models
             BackpackUpdatedCallback = (newId, newQuality, newState) => EventManager.Fire(new PlayerBackpackUpdatedEvent(player, newId, newQuality, newState));
             GlassesUpdatedCallback = (newId, newQuality, newState) => EventManager.Fire(new PlayerGlassesUpdatedEvent(player, newId, newQuality, newState));
             MaskUpdatedCallback = (newId, newQuality, newState) => EventManager.Fire(new PlayerMaskUpdatedEvent(player, newId, newQuality, newState));
+
+            HurtCallback = (victim, damage, force,cause, limb, killer) => EventManager.Fire(new PlayerHurtEvent(victim, damage, force, cause, limb, killer));
         }
 
         void HandleDropItemRequest(PlayerInventory inventory, Item item, ref bool shouldAllow)

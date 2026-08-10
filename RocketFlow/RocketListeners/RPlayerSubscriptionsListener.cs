@@ -30,6 +30,7 @@ namespace Tavstal.RocketFlow.RocketListeners
                 return;
             
             PlayerLife life = player.Player.life;
+            life.onHurt += subscriptions.HurtCallback;
             life.onOxygenUpdated += subscriptions.OxygenCallback;
             life.onVisionUpdated += subscriptions.VisionCallback;
             life.onTemperatureUpdated += subscriptions.TemperatureCallback;
